@@ -1,34 +1,45 @@
-// Navbar.tsx
+// components/Navbar.tsx
+import React from 'react';
+import { ChevronDown } from 'lucide-react';
 
-'use client'
-import { useState } from 'react';
-import Button from './button';
+interface NavbarProps {
+  scrollToSection: (ref: React.RefObject<HTMLDivElement | null>) => void;
+  aboutRef: React.RefObject<HTMLDivElement | null>;
+  contactRef: React.RefObject<HTMLDivElement | null>;
+}
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-
+const Navbar: React.FC<NavbarProps> = ({ scrollToSection, aboutRef, contactRef }) => {
   return (
-    <nav className="bg-gray-800 text-white py-4">
-      <div className="container mx-auto flex justify-between items-center px-4">
-        <a href="#" className="text-2xl font-semibold">Your Logo</a>
-        <div className="lg:flex space-x-6">
-          <a href="#" className="hover:text-blue-400">Home</a>
-          <a href="#about" className="hover:text-blue-400">About</a>
-          <a href="#contact" className="hover:text-blue-400">Contact</a>
+    <nav className="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex-shrink-0">
+            <span className="text-2xl font-bold text-purple-600">GoodMind</span>
+          </div>
+          <div className="hidden md:block">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => scrollToSection(aboutRef)}
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection(contactRef)}
+                className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-purple-600 transition-colors"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
         </div>
-        <button onClick={toggleMenu} className="lg:hidden text-2xl">
-          {isOpen ? '×' : '☰'}
-        </button>
       </div>
-      {isOpen && (
-        <div className="lg:hidden mt-4 space-y-4 text-center">
-          <a href="#" className="block text-white hover:text-blue-400">Home</a>
-          <a href="#about" className="block text-white hover:text-blue-400">About</a>
-          <a href="#contact" className="block text-white hover:text-blue-400">Contact</a>
-        </div>
-      )}
     </nav>
   );
 };
