@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/Hero';
 import AboutSection from '@/components/About';
 import ContactSection from '@/components/Contact';
+import TimelineSection from '@/components/Timeline';
 
 const LandingPage: React.FC = () => {
   const aboutRef = useRef<HTMLDivElement | null>(null);
@@ -21,6 +22,7 @@ const LandingPage: React.FC = () => {
       <Navbar scrollToSection={scrollToSection} aboutRef={aboutRef} contactRef={contactRef} />
       <HeroSection />
       <AboutSection ref={aboutRef} />
+      <TimelineSection />
       <ContactSection ref={contactRef} />
     </div>
   );
